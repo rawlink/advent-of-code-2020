@@ -16,11 +16,8 @@ def is_valid(pass_policy):
     return False
 
 def main(input):
-    lines = []
     with open(input) as f:
-        lines = f.readlines()
-
-    valid = list(filter(is_valid, map(lambda s: s.strip(), lines)))
+        valid = list(filter(is_valid, map(lambda s: s.strip(), f.readlines())))
 
     print(len(valid))
 
