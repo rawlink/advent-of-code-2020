@@ -23,7 +23,7 @@ def main(input):
 
     valid = list(filter(is_valid, map(lambda s: s.strip(), lines)))
 
-    return len(valid)
+    print(len(valid))
 
 if __name__ == '__main__':
-    print(main('passwords.txt'))
+    main('passwords.txt')
