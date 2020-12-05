@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-def main(expected_sum):
-    with open('expenses.txt') as f:
+def main(input, sum):
+    with open(input) as f:
         lines = f.readlines()
 
         vals = [int(x.strip()) for x in lines]
 
         memo = set()
         for val in vals:
-            result = expected_sum - val
+            result = sum - val
 
             if result in memo:
                 print(f'SUM: {val} + {result} = {val + result}')
@@ -17,4 +17,4 @@ def main(expected_sum):
             memo.add(val)
 
 if __name__ == '__main__':
-    main(2020)
+    main('expenses.txt', 2020)
