@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-def main(input, sum):
-    with open(input) as f:
+def main():
+    sum = 2020
+    with open('expenses.txt') as f:
         vals = [int(line.strip()) for line in f.readlines()]
 
     memo = set()
@@ -13,4 +14,4 @@ def main(input, sum):
         memo.add(val)
 
 if __name__ == '__main__':
-    main('expenses.txt', 2020)
+    main()

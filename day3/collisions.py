@@ -8,8 +8,8 @@ VECTORS = [
     [1,2],
 ]
 
-def main(input):
-    with open(input) as f:
+def main():
+    with open('map.txt') as f:
         lines = [line.strip() for line in f.readlines()]
 
     width = len(lines[0])
@@ -37,4 +37,4 @@ def main(input):
     print(f'PRODUCT: {product}')
 
 if __name__ == '__main__':
-    main('map.txt')
+    main()

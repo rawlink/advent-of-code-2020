@@ -33,8 +33,8 @@ def sled_policy(policy):
 def toboggan_policy(policy):
     return (policy.password[policy.num1 -1] == policy.char) ^ (policy.password[policy.num2 - 1] == policy.char)
 
-def main(input):
-    with open(input) as f:
+def main():
+    with open('passwords.txt') as f:
         lines = [line.strip() for line in f.readlines()]
 
     policies = parse_policies(lines)
@@ -46,4 +46,4 @@ def main(input):
     print(f'Valid toboggan policies: {toboggan_valid}')
 
 if __name__ == '__main__':
-    main('passwords.txt')
+    main()
