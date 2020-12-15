@@ -118,17 +118,17 @@ def part2(route):
 def main():
     route = load('test1.txt')
     manhattan = part1(route)
-    print(f'Test 1 - Manhattan 1: {manhattan}')
+    print(f'Test 1 - Part 1: {manhattan}')
     assert manhattan == 25
     manhattan = part2(route)
-    print(f'Test 1 - Manhattan 2: {manhattan}')
+    print(f'Test 1 - Part 2: {manhattan}')
     assert manhattan == 286
 
     route = load('input.txt')
     manhattan = part1(route)
-    print(f'Manhattan 1: {manhattan}')
+    print(f'Part 1: {manhattan}')
     manhattan = part2(route)
-    print(f'Manhattan 2: {manhattan}')
+    print(f'Part 2: {manhattan}')
 
 if __name__ == '__main__':
     main()
