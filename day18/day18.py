@@ -21,15 +21,6 @@ def operate(a, b, op):
     else:
         raise Exception(f'Unknown operator: {op}')
 
-def part1_op_precedence_gte(op1, op2):
-    return True
-
-def part2_op_precedence_gte(op1, op2):
-    if op1 != op2 and op1 == MUL:
-        return False
-
-    return True
-
 def part1(exercises):
     total = 0
     # Seeing as the input data only has single digit numbers, I'm going to take advantage of that. I'm also taking advantage
@@ -58,47 +49,6 @@ def part1(exercises):
 
         total += subtotal
     return total
-
-# def part2(exercises):
-#     total = 0
-
-#     for exercise in exercises:
-#         values = deque()
-#         ops = deque()
-#         for c in exercise:
-#             if c == SPACE:
-#                 continue
-#             elif c.isdigit():
-#                 num = int(c)
-#                 if len(ops) > 1 and ops[-1] == ADD:
-#                     values.append(operate(values.pop(), num, ops.pop()))
-#                 else:
-#                     values.append(num)
-#             elif c == LEFT:
-#                 ops.append(c)
-#             elif c == RIGHT:
-#                 while ops[-1] != LEFT:
-#                     op = ops.pop()
-#                     a = values.pop()
-#                     b = values.pop()
-#                     values.append(operate(a, b, op))
-#                 ops.pop() # discard the left parentheses that should be left on the op stack
-#                 if len(ops) > 0 and ops[-1] == ADD:
-#                     values.append(operate(values.pop(), values.pop(), ops.pop()))
-#             elif c == ADD or c == MUL:
-#                 ops.append(c)
-#             else:
-#                 raise Exception('Should not have reached here')
-
-#         while len(ops) > 0:
-#             values.append(operate(values.pop(), values.pop(), ops.pop()))
-
-#         if len(values) != 1:
-#             raise Exception('Should not have reached here either')
-        
-#         total += values[0]
-
-#     return total
 
 def part2(exercises):
     # Had to look up shunting algorithm for a reminder on how it should work.
