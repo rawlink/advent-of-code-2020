@@ -10,11 +10,11 @@ def parse_instruction(line):
     match = pattern.match(line)
     return (match.group(1), int(match.group(2)))
 
-def compile_code(sources):
-    code = []
-    for line in sources:
-        code.append(parse_instruction(line))
-    return code
+def load(file):
+    with open(file) as f:
+        lines = [line.strip() for line in f.readlines()]
+    
+    return [parse_instruction(line) for line in lines]
 
 def eval_instruction(instruction, fix):
     (op, value) = instruction
@@ -31,6 +31,12 @@ def eval_instruction(instruction, fix):
     raise Exception(f'Unknown instruction: {instruction}')
 
 def run_code(code, fix):
+    '''
+    >>> run_code(load('test1.txt'), False)
+    5
+    >>> run_code(load('test1.txt'), True)
+    8
+    '''
     acc = 0
     visited = set()
     pos = 0
@@ -46,7 +52,6 @@ def run_code(code, fix):
 
         if pos in visited:
             if not fix:
-                print('Loop detected')
                 return acc
             else:
                 (pos_delta, acc_delta) = eval_instruction(code[saved_pos], False)
@@ -64,22 +69,20 @@ def run_code(code, fix):
             saved_visited = visited.copy()
             saved_acc = acc
 
-        (pos_delta, acc_delta) = eval_instruction(code[pos], pos == saved_pos and fix)
+        pos_delta, acc_delta = eval_instruction(code[pos], pos == saved_pos and fix)
         pos += pos_delta
         acc += acc_delta
 
 
 def main():
-    with open('boot.txt') as f:
-        lines = [line.strip() for line in f.readlines()]
-    
-    code = compile_code(lines)
+    code = load('input.txt')
+    value = run_code(code, False)
+    print(f'Part 1: {value}')
+    assert value == 1832
 
-    acc = run_code(code, False)
-    print(f'Accumulator without fix: {acc}')
-
-    acc = run_code(code, True)
-    print(f'Accumulator with fix: {acc}')
+    value = run_code(code, True)
+    print(f'Part 2: {value}')
+    assert value == 662
 
 if __name__ == '__main__':
     main()
