@@ -1,21 +1,30 @@
 #!/usr/bin/env python3
+TOTAL = 2020
 
 def load(file):
     with open(file) as f:
         expenses = [int(line.strip()) for line in f.readlines()]
-    
+
     return expenses
 
 def part1(expenses, sum):
+    '''
+    >>> part1(load('test1.txt'), TOTAL)
+    514579
+    '''
     memo = set()
     for expense in expenses:
-        result = sum - expense
-        if result in memo:
-            return expense * result
+        diff = sum - expense
+        if diff in memo:
+            return expense * diff
         memo.add(expense)
     return None
 
 def part2(expenses, sum):
+    '''
+    >>> part2(load('test1.txt'), TOTAL)
+    241861950
+    '''
     for idx,expense in enumerate(expenses[:-1]):
         memo = set()
         result = sum - expense
@@ -31,21 +40,14 @@ def part2(expenses, sum):
     return None
 
 def main():
-    sum = 2020
-
-    expenses = load('test1.txt')
-    product = part1(expenses, sum)
-    print(f'Test1 - Part 1 product: {product}')
-    assert product == 514579
-    product = part2(expenses, sum)
-    print(f'Test1 - Part 2 product: {product}')
-    assert product == 241861950
-
     expenses = load('input.txt')
-    product = part1(expenses, sum)
-    print(f'Part 1 product: {product}')
-    product = part2(expenses, sum)
-    print(f'Part 2 product: {product}')
-    
+    value = part1(expenses, TOTAL)
+    print(f'Part 1: {value}')
+    assert value == 989824
+
+    value = part2(expenses, TOTAL)
+    print(f'Part 2: {value}')
+    assert value == 66432240
+
 if __name__ == '__main__':
     main()

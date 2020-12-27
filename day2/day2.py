@@ -30,6 +30,10 @@ def load(file):
     return policies
 
 def part1(policies):
+    '''
+    >>> part1(load('test1.txt'))
+    2
+    '''
     count = 0
     for policy in policies:
         num_chars = policy.password.count(policy.char)
@@ -39,6 +43,10 @@ def part1(policies):
 
 
 def part2(policies):
+    '''
+    >>> part2(load('test1.txt'))
+    1
+    '''
     count = 0
     for policy in policies:
         if (policy.password[policy.num1 -1] == policy.char) ^ (policy.password[policy.num2 - 1] == policy.char):
@@ -47,20 +55,15 @@ def part2(policies):
 
 
 def main():
-
-    policies = load('test1.txt')
-    valid = part1(policies)
-    print(f'Test 1 - Valid sled policies: {valid}')
-    assert valid == 2
-    valid = part2(policies)
-    print(f'Test 1 - Valid toboaggan policies: {valid}')
-    assert valid == 1
-
     policies = load('input.txt')
-    valid = part1(policies)
-    print(f'Valid sled policies: {valid}')
-    valid = part2(policies)
-    print(f'Valid toboaggan policies: {valid}')
+    value = part1(policies)
+    print(f'Part 1: {value}')
+    assert value == 410
+
+
+    value = part2(policies)
+    print(f'Part 2: {value}')
+    assert value == 694
 
 if __name__ == '__main__':
     main()
