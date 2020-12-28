@@ -74,7 +74,7 @@ def count_neighbors(seating, row, seat, value, rule):
 def count_seating(seating, value):
     return sum([row.count(value) for row in seating])
 
-def original_seating_rule(src):
+def part1_seating_rule(src):
     dst = deepcopy(src)
 
     for row in range(len(src)):
@@ -86,7 +86,7 @@ def original_seating_rule(src):
 
     return dst
 
-def final_seating_rule(src):
+def part2_seating_rule(src):
     dst = deepcopy(src)
 
     for row in range(len(src)):
@@ -99,32 +99,30 @@ def final_seating_rule(src):
     return dst
 
 def iterate(seating, rule):
-
+    '''
+    >>> iterate(load('test1.txt'), part1_seating_rule)
+    37
+    >>> iterate(load('test1.txt'), part2_seating_rule)
+    26
+    '''
     last = None
     current = seating
 
-    iter = 0
     while current != last:
         last = current
         current = rule(last)
-        iter += 1
 
     return count_seating(current, OCCUPIED)
 
 def main():
-    seating = load('test1.txt')
-    seats = iterate(seating, original_seating_rule)
-    print(f'Test 1 - Seats (original rule): {seats}')
-    assert seats == 37
-    seats = iterate(seating, final_seating_rule)
-    print(f'Test 1 - Seats (final rule): {seats}')
-    assert seats == 26
-
     seating = load('input.txt')
-    seats = iterate(seating, original_seating_rule)
-    print(f'Seats (original rule): {seats}')
-    seats = iterate(seating, final_seating_rule)
-    print(f'Seats (original rule): {seats}')
+    value = iterate(seating, part1_seating_rule)
+    print(f'Part 1: {value}')
+    assert value == 2448
+
+    value = iterate(seating, part2_seating_rule)
+    print(f'Part 2: {value}')
+    assert value == 2234
 
 if __name__ == '__main__':
     main()

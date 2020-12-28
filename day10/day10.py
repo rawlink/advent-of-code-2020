@@ -1,18 +1,37 @@
 #!/usr/bin/env python3
 from collections import deque
 
+def load(file):
+    with open(file) as f:
+        adapters = [int(line.strip()) for line in f.readlines()]
+    adapters.append(0)
+    adapters.sort()
+    adapters.append(adapters[-1] + 3)
+    return adapters
+
 def part1(adapters):
+    '''
+    >>> part1(load('test1.txt'))
+    35
+    >>> part1(load('test2.txt'))
+    220
+    '''
     distribution = [0,0,0]
     last = adapters[0]
 
     for adapter in adapters[1:]:
-        diff = adapter - last
-        distribution[diff - 1] += 1
+        distribution[adapter - last - 1] += 1
         last = adapter
     
     return distribution[0] * distribution[2]
 
 def part2(adapters):
+    '''
+    >>> part2(load('test1.txt'))
+    8
+    >>> part2(load('test2.txt'))
+    19208
+    '''
     acc = deque()
     acc.append([adapters[0], 1])
     for adapter in adapters[1:]:
@@ -30,35 +49,16 @@ def part2(adapters):
             acc.popleft()
 
     return acc[-1][1]
-
-def load(file):
-    with open(file) as f:
-        adapters = [int(line.strip()) for line in f.readlines()]
-    adapters.append(0)
-    adapters.sort()
-    adapters.append(adapters[-1] + 3)
-    return adapters
     
 def main():
-    adapters = load('test1.txt')
-    result = part1(adapters)
-    print(f'Test 1 jolt product: {result}')
-    assert result == 35
-    result = part2(adapters)
-    print(f'Test 1 jolt combos: {result}')
-    assert result == 8
-
-    adapters = load('test2.txt')
-    result = part1(adapters)
-    print(f'Test 2 jolt product: {result}')
-    assert result == 220
-    result = part2(adapters)
-    print(f'Test 2 jolt combos: {result}')
-    assert result == 19208
-
     adapters = load('input.txt')
-    print(f'Jolt product: {part1(adapters)}')
-    print(f'Jolt combos: {part2(adapters)}')
+    value = part1(adapters)
+    print(f'Part 1: {value}')
+    assert value == 2470
+
+    value = part2(adapters)
+    print(f'Part 2: {value}')
+    assert value == 1973822685184
 
 if __name__ == '__main__':
     main()

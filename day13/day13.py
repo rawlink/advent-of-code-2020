@@ -31,6 +31,10 @@ def minutes_til_bus(timestamp, bus):
     return bus - (timestamp % bus)
 
 def part1(timestamp, buses):
+    '''
+    >>> part1(*load('test1.txt'))
+    295
+    '''
     bus_to_catch = buses[0]
     bus_to_catch_wait = minutes_til_bus(timestamp, bus_to_catch)
 
@@ -45,6 +49,10 @@ def part1(timestamp, buses):
     return bus_to_catch * bus_to_catch_wait
 
 def part2(buses):
+    '''
+    >>> part2(load('test1.txt')[1])
+    1068781
+    '''
     # A quick visual inspection of the dataset shows that the bus numbers are all prime. We'll take advantage of that.
     # If they are at least co-prime, we can use Chinese Remainder Theorem - https://www.youtube.com/watch?v=zIFehsBHB8o
     start = 0
@@ -96,19 +104,14 @@ def part2(buses):
     return result
 
 def main():
-    timestamp, buses = load('test1.txt')
-    result = part1(timestamp, buses)
-    print(f'Test 1 - Part 1: {result}')
-    assert result == 295
-    result = part2(buses)
-    print(f'Test 1 - Part 2: {result}')
-    assert result == 1068781
-
     timestamp, buses = load('input.txt')
-    result = part1(timestamp, buses)
-    print(f'Part 1: {result}')
-    result = part2(buses)
-    print(f'Part 2: {result}')
+    value = part1(timestamp, buses)
+    print(f'Part 1: {value}')
+    assert value == 6559
+
+    value = part2(buses)
+    print(f'Part 2: {value}')
+    assert value == 626670513163231
 
 
 if __name__ == '__main__':

@@ -73,6 +73,10 @@ def rotate_wp(x, y, instruction, value):
     raise Exception(f'Invalid rotation ({value}). Rotations must be increments of 90.')
 
 def part1(route):
+    '''
+    >>> part1(load('test1.txt'))
+    25
+    '''
     x = 0
     y = 0
     ship_rotation = 90
@@ -93,6 +97,10 @@ def part1(route):
     return abs(x) + abs(y)
 
 def part2(route):
+    '''
+    >>> part2(load('test1.txt'))
+    286
+    '''
     x = 0
     y = 0
     wp_x = 10
@@ -116,19 +124,14 @@ def part2(route):
 
 
 def main():
-    route = load('test1.txt')
-    manhattan = part1(route)
-    print(f'Test 1 - Part 1: {manhattan}')
-    assert manhattan == 25
-    manhattan = part2(route)
-    print(f'Test 1 - Part 2: {manhattan}')
-    assert manhattan == 286
-
     route = load('input.txt')
-    manhattan = part1(route)
-    print(f'Part 1: {manhattan}')
-    manhattan = part2(route)
-    print(f'Part 2: {manhattan}')
+    value = part1(route)
+    print(f'Part 1: {value}')
+    assert value == 2057
+
+    value = part2(route)
+    print(f'Part 2: {value}')
+    assert value == 71504
 
 if __name__ == '__main__':
     main()
