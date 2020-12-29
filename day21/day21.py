@@ -28,7 +28,12 @@ def map_allergens(data):
 
     return possibilities
 
-def part1(data, possibilities):
+def part1(data):
+    '''
+    >>> part1(load('test1.txt'))
+    5
+    '''
+    possibilities = map_allergens(data)
     all_possibilities = set(possible for ingredients in possibilities.values() for possible in ingredients)
 
     total = 0
@@ -39,8 +44,13 @@ def part1(data, possibilities):
 
     return total
 
-def part2(possibilities):
+def part2(data):
+    '''
+    >>> part2(load('test1.txt'))
+    'mxmxvkd,sqjhc,fvjkl'
+    '''
     # This function destructively modifies possibilities... That's fine for this task.
+    possibilities = map_allergens(data)
     singles = set()
 
     while len(singles) < len(possibilities):
@@ -60,21 +70,14 @@ def part2(possibilities):
     return ','.join(next(iter(possibilities[allergen])) for allergen in sorted(possibilities.keys()))
 
 def main():
-    data = load('test1.txt')
-    possibilities = map_allergens(data)
-    value = part1(data, possibilities)
-    print(f'Test 1 - Part 1: {value}')
-    assert value == 5
-    value = part2(possibilities)
-    print(f'Test 1 - Part 2: {value}')
-    assert value == 'mxmxvkd,sqjhc,fvjkl'
-
-    data = load('input.txt')
-    possibilities = map_allergens(data)
-    value = part1(data, possibilities)
+    ingredients = load('input.txt')
+    value = part1(ingredients)
     print(f'Part 1: {value}')
-    value = part2(possibilities)
+    assert value == 1930
+
+    value = part2(ingredients)
     print(f'Part 2: {value}')
+    assert value == 'spcqmzfg,rpf,dzqlq,pflk,bltrbvz,xbdh,spql,bltzkxx'
 
 if __name__ == '__main__':
     main()

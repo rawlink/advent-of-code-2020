@@ -38,6 +38,12 @@ def match_rules(message, rules, sequence):
     return False
 
 def part1(rules, messages):
+    '''
+    >>> part1(*load('test1.txt'))
+    2
+    >>> part1(*load('test2.txt'))
+    3
+    '''
     total = 0
     for message in messages:
         if match_rules(message, rules, ['0']):
@@ -46,6 +52,10 @@ def part1(rules, messages):
     return total
 
 def part2(rules, messages):
+    '''
+    >>> part2(*load('test2.txt'))
+    12
+    '''
     patch = ['8: 42 | 42 8', '11: 42 31 | 42 11 31']
     for rule in patch:
         key, value = parse_rule(rule)
@@ -58,16 +68,14 @@ def part2(rules, messages):
 # Ugggh. This one is ugly :-/. I'm not proud of the readability (or lack thereof). It took forever to get the recursion
 # to work correctly. I'm sure there is a better way.
 def main():
-    rules, messages = load('test1.txt')
-    value = part1(rules, messages)
-    print(f'Test 1 - Part 1: {value}')
-    assert value == 2
-
     rules, messages = load('input.txt')
     value = part1(rules, messages)
     print(f'Part 1: {value}')
+    assert value == 299
+
     value = part2(rules, messages)
     print(f'Part 2: {value}')
+    assert value == 414
 
 if __name__ == '__main__':
     main()

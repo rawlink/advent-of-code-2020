@@ -2,25 +2,24 @@
 from math import prod
 from functools import reduce
 
+def parse_rule(rule):
+    name, ranges = rule.split(':')
+    name = name.strip()
+    ranges = ranges.split('or')
+    ranges = [tuple(map(int, range.split('-'))) for range in ranges] #assuming ranges are always (min,max)
+
+    return name, ranges
+
+def parse_ticket(ticket):
+    return list(map(int, ticket.split(',')))
+
 def load(file):
     with open(file) as f:
-        lines = [line.strip() for line in f.readlines()]
+        rules, mine, others = [block.split('\n') for block in f.read().split('\n\n')]
 
-    rules = {}
-    # Assuming the file is formatted perfectly. No guardrails.
-    for idx,line in enumerate(lines):
-        if not line:
-            break
-        name, ranges = line.split(':')
-        ranges = ranges.split('or')
-        ranges = [tuple(map(int, range.split('-'))) for range in ranges] #assuming ranges are always (min,max)
-        rules[name.strip()] = ranges
-
-    idx += 2
-    mine = [int(num) for num in lines[idx].split(',')]
-
-    idx += 3
-    others = [list(map(int, line.split(','))) for line in lines[idx:]]
+    rules = {k:v for k,v in (parse_rule(rule) for rule in rules)}
+    mine = parse_ticket(mine[1])
+    others = [parse_ticket(ticket) for ticket in others[1:] if ticket.strip()]
     
     return rules, mine, others
 
@@ -29,6 +28,10 @@ def passes_rules(rules, value):
 
 # Would be faster if the rules were consolidated into contiguous ranges. Too lazy. So much looping in this one.
 def part1(rules, others):
+    '''
+    >>> part1(*load('test1.txt')[::2])
+    (71, [[7, 3, 47]])
+    '''
     total = 0
     valid = []
     for values in others:
@@ -80,24 +83,17 @@ def part2(rules, mine, valid):
 
     column_names = resolve_possibilities(possible_column_names)
 
-    prod = 1
-    for idx,column_name in enumerate(column_names):
-        if 'departure' in column_name:
-            prod *= mine[idx]
-
-    return prod
+    return prod(mine[idx] for idx, column_name in enumerate(column_names) if 'departure' in column_name)
 
 def main():
-    rules, mine, others = load('test1.txt')
-    value, _ = part1(rules, others)
-    print(f'Test 1 - Part 1: {value}')
-    assert value == 71
-
     rules, mine, others = load('input.txt')
     value, valid = part1(rules, others)
     print(f'Part 1: {value}')
+    assert value == 20048
+
     value = part2(rules, mine, valid)
     print(f'Part 2: {value}')
+    assert value == 4810284647569
 
 if __name__ == '__main__':
     main()

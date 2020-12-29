@@ -1,16 +1,38 @@
 #!/usr/bin/env python3
-TEST1_DATA = [0,3,6]
-TEST2_DATA = [1,3,2]
-TEST3_DATA = [2,1,3]
-TEST4_DATA = [1,2,3]
-TEST5_DATA = [2,3,1]
-TEST6_DATA = [3,2,1]
-TEST7_DATA = [3,1,2]
-
-DATA = [1,17,0,10,18,11,6]
-
+PART1_TARGET = 2020
+PART2_TARGET = 30000000
 
 def part1(numbers, target):
+    '''
+    >>> part1([0,3,6], 10)
+    0
+    >>> part1([0,3,6], PART2_TARGET)
+    175594
+    >>> part1([1,3,2], PART1_TARGET)
+    1
+    >>> part1([1,3,2], PART2_TARGET)
+    2578
+    >>> part1([2,1,3], PART1_TARGET)
+    10
+    >>> part1([2,1,3], PART2_TARGET)
+    3544142
+    >>> part1([1,2,3], PART1_TARGET)
+    27
+    >>> part1([1,2,3], PART2_TARGET)
+    261214
+    >>> part1([2,3,1], PART1_TARGET)
+    78
+    >>> part1([2,3,1], PART2_TARGET)
+    6895259
+    >>> part1([3,2,1], PART1_TARGET)
+    438
+    >>> part1([3,2,1], PART2_TARGET)
+    18
+    >>> part1([3,1,2], PART1_TARGET)
+    1836
+    >>> part1([3,1,2], PART2_TARGET)
+    362
+    '''
     memory = {}
 
     for idx, number in enumerate(numbers[:-1]):
@@ -32,62 +54,15 @@ def part1(numbers, target):
     return last
 
 def main():
-    part1_target = 2020
-    part2_target = 30000000
+    data = [1,17,0,10,18,11,6]
 
-    value = part1(TEST1_DATA, 10)
-    print(f'TEST 1 - PART 1: {value}')
-    assert value == 0
-    value = part1(TEST1_DATA, part2_target)
-    print(f'TEST 1 - PART 2: {value}')
-    assert value == 175594
+    value = part1(data, PART1_TARGET)
+    print(f'Part 1: {value}')
+    assert value == 595
 
-    value = part1(TEST2_DATA, part1_target)
-    print(f'TEST 2 - PART 1: {value}')
-    assert value == 1
-    value = part1(TEST2_DATA, part2_target)
-    print(f'TEST 1 - PART 2: {value}')
-    assert value == 2578
-
-    value = part1(TEST3_DATA, part1_target)
-    print(f'TEST 3 - PART 1: {value}')
-    assert value == 10
-    value = part1(TEST3_DATA, part2_target)
-    print(f'TEST 1 - PART 2: {value}')
-    assert value == 3544142
-
-    value = part1(TEST4_DATA, part1_target)
-    print(f'TEST 4 - PART 1: {value}')
-    assert value == 27
-    value = part1(TEST4_DATA, part2_target)
-    print(f'TEST 1 - PART 2: {value}')
-    assert value == 261214
-
-    value = part1(TEST5_DATA, part1_target)
-    print(f'TEST 5 - PART 1: {value}')
-    assert value == 78
-    value = part1(TEST5_DATA, part2_target)
-    print(f'TEST 1 - PART 2: {value}')
-    assert value == 6895259
-
-    value = part1(TEST6_DATA, part1_target)
-    print(f'TEST 6 - PART 1: {value}')
-    assert value == 438
-    value = part1(TEST6_DATA, part2_target)
-    print(f'TEST 1 - PART 2: {value}')
-    assert value == 18
-
-    value = part1(TEST7_DATA, part1_target)
-    print(f'TEST 7 - PART 1: {value}')
-    assert value == 1836
-    value = part1(TEST7_DATA, part2_target)
-    print(f'TEST 1 - PART 2: {value}')
-    assert value == 362
-
-    value = part1(DATA, part1_target)
-    print(f'PART 1: {value}')
-    value = part1(DATA, part2_target)
-    print(f'PART 2: {value}')
+    value = part1(data, PART2_TARGET)
+    print(f'Part 2: {value}')
+    assert value == 1708310
 
 if __name__ == '__main__':
     main()

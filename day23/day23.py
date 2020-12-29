@@ -44,6 +44,10 @@ def play(ring, start, high, iterations):
         curr = ring[curr]
 
 def part1(data):
+    '''
+    >>> part1([3, 8, 9, 1, 2, 5, 4, 6, 7])
+    '67384529'
+    '''
     iterations = 100
     high = max(data)
     ring = create_ring(data)
@@ -60,6 +64,10 @@ def part1(data):
     return ''.join(result)
 
 def part2(data):
+    '''
+    >>> part2([3, 8, 9, 1, 2, 5, 4, 6, 7])
+    149245887792
+    '''
     cups = 1000000
     iterations = 10000000
     high = max(data)
@@ -74,17 +82,13 @@ def part2(data):
 
 
 def main():
-    value = part1([3, 8, 9, 1, 2, 5, 4, 6, 7])
-    print(f'Test 1 - Part 1: {value}')
-    assert value == '67384529'
-    value = part2([3, 8, 9, 1, 2, 5, 4, 6, 7])
-    print(f'Test 1 - Part 2: {value}')
-    assert value == 149245887792
-
     value = part1([8, 7, 1, 3, 6, 9, 4, 5, 2])
     print(f'Part 1: {value}')
+    assert value == '28793654'
+
     value = part2([8, 7, 1, 3, 6, 9, 4, 5, 2])
     print(f'Part 2: {value}')
+    assert value == 359206768694
 
 if __name__ == '__main__':
     main()

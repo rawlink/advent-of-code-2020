@@ -30,6 +30,10 @@ def load(file):
     return instructions
 
 def part1(instructions):
+    '''
+    >>> len(part1(load('test1.txt')))
+    10
+    '''
     tiles = set()
 
     for steps in instructions:
@@ -67,6 +71,10 @@ def count_neighbors(tile, tiles):
     return count
 
 def part2(black_tiles):
+    '''
+    >>> part2(part1(load('test1.txt')))
+    2208
+    '''
     curr = black_tiles.copy()
 
     for _ in range(100):
@@ -85,21 +93,15 @@ def part2(black_tiles):
 # rows being at "half-step" offsets (also yuck), to finally going to a geometric solution using the coordinates of the centers
 # of the tiles surrounding the current tile.
 def main():
-    instructions = load('test1.txt')
-    black_tiles = part1(instructions)
-    value = len(black_tiles)
-    print(f'Test 1 - Part 1: {value}')
-    assert value == 10
-    value = part2(black_tiles)
-    print(f'Test 1 - Part 2: {value}')
-    assert value == 2208
-
     instructions = load('input.txt')
     black_tiles = part1(instructions)
     value = len(black_tiles)
     print(f'Part 1: {value}')
+    assert value == 400
+
     value = part2(black_tiles)
     print(f'Part 2: {value}')
+    assert value == 3768
 
 if __name__ == '__main__':
     main()

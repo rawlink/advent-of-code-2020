@@ -190,7 +190,21 @@ def calc_roughness(image):
 def rotate_around_edge(edge, rotation):
     return (edge + rotation) % 4
 
-def part2(tiles, adjacencies, corners):
+def part1(tiles):
+    '''
+    >>> part1(load('test1.txt'))
+    20899048083289
+    '''
+    adjacencies = get_adjacencies(tiles)
+    return math.prod(get_corners(adjacencies))
+
+def part2(tiles):
+    '''
+    >>> part2(load('test1.txt'))
+    273
+    '''
+    adjacencies = get_adjacencies(tiles)
+    corners = get_corners(adjacencies)
 
     # Figure out how we want to rotate an arbitrary corner to be our first piece in the "upper-left" corner. The 2 linked
     # edges need to be on the bottom and the right. We need to rotate the clockwise most edge into position 2
@@ -266,24 +280,14 @@ def print_image(image):
 # thing would be an easy fix). Also, this one isn't going to win any code golf contests :-P
 # Essentially build an adjacency list of all the pieces, and then take one corner and build it out into a grid, row by row.
 def main():
-    tiles = load('test1.txt')
-    adjacencies = get_adjacencies(tiles)
-    corners = get_corners(adjacencies)
-    value = math.prod(corners)
-    print(f'Test 1 - Part 1: {value}')
-    assert value == 20899048083289
-    value = part2(tiles, adjacencies, corners)
-    print(f'Test 1 - Part 2: {value}')
-    assert value == 273
-
     tiles = load('input.txt')
-    adjacencies = get_adjacencies(tiles)
-    corners = get_corners(adjacencies)
-    value = math.prod(corners)
+    value = part1(tiles)
     print(f'Part 1: {value}')
-    value = part2(tiles, adjacencies, corners)
-    print(f'Part 2: {value}')
+    assert value == 64802175715999
 
+    value = part2(tiles)
+    print(f'Part 2: {value}')
+    assert value == 2146
 
 if __name__ == '__main__':
     main()

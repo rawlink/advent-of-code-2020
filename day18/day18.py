@@ -9,9 +9,7 @@ SPACE = ' '
 
 def load(file):
     with open(file) as f:
-        exercises = [line.strip() for line in f.readlines()]
-    
-    return exercises
+        return [line.strip() for line in f.readlines()]
 
 def operate(a, b, op):
     if op == ADD:
@@ -22,6 +20,10 @@ def operate(a, b, op):
         raise Exception(f'Unknown operator: {op}')
 
 def part1(exercises):
+    '''
+    >>> part1(load('test1.txt'))
+    26335
+    '''
     total = 0
     # Seeing as the input data only has single digit numbers, I'm going to take advantage of that. I'm also taking advantage
     # of the fact that the input is "correct".
@@ -51,6 +53,11 @@ def part1(exercises):
     return total
 
 def part2(exercises):
+    '''
+    >>> part2(load('test1.txt'))
+    693891
+
+    '''
     # Had to look up shunting algorithm for a reminder on how it should work.
     total = 0
 
@@ -87,19 +94,14 @@ def part2(exercises):
 
 
 def main():
-    exercises = load('test1.txt')
-    value = part1(exercises)
-    print(f'Test 1 - Part 1: {value}')
-    assert value == 26335
-    value = part2(exercises)
-    print(f'Test 1 - Part 2: {value}')
-    assert value == 693891
-
     exercises = load('input.txt')
     value = part1(exercises)
     print(f'Part 1: {value}')
+    assert value == 12918250417632
+
     value = part2(exercises)
     print(f'Part 2: {value}')
+    assert value == 171259538712010
 
 if __name__ == '__main__':
     main()

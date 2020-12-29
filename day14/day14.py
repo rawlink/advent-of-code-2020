@@ -43,6 +43,10 @@ def load(file):
     return lines
 
 def part1(instructions):
+    '''
+    >>> part1(load('test1.txt'))
+    165
+    '''
     mem = {}
     mask = Mask(EX * 36)
 
@@ -60,6 +64,10 @@ def part1(instructions):
 
 # I think there are some optimized solutions, but I'm done thinking about it and hope brute force is fast enough.
 def part2(instructions):
+    '''
+    >>> part2(load('test2.txt'))
+    208
+    '''
     mem = {}
     mask = Mask(ZERO * 36)
 
@@ -77,20 +85,14 @@ def part2(instructions):
     return sum(mem.values())
 
 def main():
-    instructions = load('test1.txt')
-    value = part1(instructions)
-    print(f'Test 1 - Part 1: {value}')
-    assert value == 165
-    instructions = load('test2.txt')
-    value = part2(instructions)
-    print(f'Test 1 - Part 2: {value}')
-    assert value == 208
-
     instructions = load('input.txt')
     value = part1(instructions)
     print(f'Part 1: {value}')
+    assert value == 11327140210986
+
     value = part2(instructions)
     print(f'Part 2: {value}')
+    assert value == 2308180581795
 
 if __name__ == '__main__':
     main()

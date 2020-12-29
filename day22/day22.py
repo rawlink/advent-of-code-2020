@@ -11,6 +11,10 @@ def calculate_score(cards):
     return sum(i * c for i, c in enumerate(reversed(cards), 1))
 
 def part1(d1, d2):
+    '''
+    >>> part1(*load('test1.txt'))
+    306
+    '''
     d1 = deque(d1)
     d2 = deque(d2)
 
@@ -58,22 +62,22 @@ def part2_recurse(d1, d2):
     return calculate_score(d1 if len(d1) > len(d2) else d2), len(d1) > len(d2)
 
 def part2(d1, d2):
+    '''
+    >>> part2(*load('test1.txt'))
+    291
+    '''
+
     return part2_recurse(d1, d2)[0]
 
 def main():
-    deck1, deck2 = load('test1.txt')
-    value = part1(deck1, deck2)
-    print(f'Test 1 - Part 1: {value}')
-    assert value == 306
-    value = part2(deck1, deck2)
-    print(f'Test 1 - Part 2: {value}')
-    assert value == 291
-
     deck1, deck2 = load('input.txt')
     value = part1(deck1, deck2)
     print(f'Part 1: {value}')
+    assert value == 31629
+
     value = part2(deck1, deck2)
     print(f'Part 2: {value}')
+    assert value == 35196
 
 if __name__ == '__main__':
     main()
